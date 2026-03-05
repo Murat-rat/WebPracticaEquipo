@@ -5,16 +5,20 @@ import { AuthenticationContext } from '../App'
 
 const User = () => {
   const navigator = useNavigate();
-  const { setIsLoggedIn } = useContext(AuthenticationContext);
+  const { authentication, setAuthentication } = useContext(AuthenticationContext);
 
   const cerrarSesion = () => {
-    setIsLoggedIn(false);
+    setAuthentication({
+      isLoggedIn : false,
+      user : null
+    });
     navigator("/")
   }
   return (
     <>
         <h1>User</h1>
         <hr />
+        <p>Hola {authentication.user.nombre}</p>
         <Button text='Cerrar Sesión' action={cerrarSesion}/>
     </>
   )

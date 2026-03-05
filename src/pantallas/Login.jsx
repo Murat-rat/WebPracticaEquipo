@@ -3,22 +3,39 @@ import Input from '../componentes/Input'
 import Button from '../componentes/Button'
 import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from '../App';
+import usuarios from '../data/usuarios';
 
 function Login () {
     const navigator = useNavigate();
-    const { setIsLoggedIn } = useContext(AuthenticationContext);
+    const { setAuthentication } = useContext(AuthenticationContext);
     
     const [usuario, setUsuario] = useState("");
     const [contraseña, setContraseña] = useState("");
 
-    const tipo = "Admin"
-
     const inicioDeSesion = () => {
         if (usuario === "" || usuario === null || contraseña === "" || contraseña === null){
             alert("Por favor asegurate de llenar todos los campos")
+            return;
+        } 
+        
+        const usuarioEncontrado = usuarios.find(
+            (u) => u.nombre === usuario && u.contrasenia === contraseña
+        );
+
+        if (!usuarioEncontrado) {
+            alert("Correo o contraseña incorrectos");
+            return;
+        }
+
+        setAuthentication({
+            isLoggedIn : true,
+            user : usuarioEncontrado
+        });
+
+        if (usuarioEncontrado.rol === "Admin") {
+            navigator("/admin");
         } else {
-            setIsLoggedIn(true)
-            tipo === "Admin" ? navigator("/admin") : navigator("/user")
+            navigator("/user");
         }
     }
 

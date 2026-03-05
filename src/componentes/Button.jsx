@@ -5,19 +5,22 @@ const StylesButtonPrimary = {
   border: "none",
   borderRadius: "5px",
   widthMinimum: "10px",
-  height: "30px",
+  height: "40px",
   margin: "10px",
   color: "white",
+  cursor: "pointer",
+  padding: "0 15px"
 }
 
 const StylesButtonSecondary = {
-  backgroundColor: "#6452ca",
+  backgroundColor: "#d8d6d8",
   border: "none",
   borderRadius: "5px",
   widthMinimum: "10px",
-  height: "30px",
+  height: "40px",
   margin: "10px",
   color: "rgb(69, 69, 69)",
+  cursor: "pointer"
 }
 
 
@@ -32,10 +35,7 @@ function Button({
         style={
           type === "primary" ?
            StylesButtonPrimary :
-           {...StylesButtonSecondary,
-            backgroundColor: "#d8d6d8",
-            cursor: "pointer",
-           }
+           StylesButtonSecondary
         }
 
       onClick={action}
